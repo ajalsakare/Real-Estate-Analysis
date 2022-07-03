@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>House Price Prediction</title>
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+    <div class="topnav">
+        <a class="nav-content" href="https://plotly.com/~ajalsakare/1/">Price Factors</a>
+        <a class="nav-content" href="https://github.com/ajalsakare/Real-Estate-Analysis">Source</a>
+        <a class="nav-content" href="{{ url_for('home_page') }}">Home</a>
+        <a class="nav-title">House Price Prediction</a>
+    </div>
+    <form action="{{ url_for('predict')}}" method="post" enctype="multipart/form-data">
+        <div class="container1">
+            <table border="0">
+
+                <tr>
+                    <td>
+                        <label class="left">City</label>
+                        <br><br>
+                        <select class="left" name="City" required>
+                            <option value="">Select</option>
+                        {% for c in cities: %}
+                            <option value={{c}}>{{c}}</option>
+                        {% endfor %}
+                        </select>
+                    </td>
+                    <td>
+                        <label class="right">State/Territory</label>
+                        <br><br>
+                        <select class="right" name="State/Territory" required>
+                            <option value="">Select</option>
+                        {% for s in states: %}
+                            <option value={{s}}>{{s}}</option>
+                        {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="left">Tier</label>
+                        <br><br>
+                        <select class="left" name="Tier" required>
+                            <option value="">Select</option>
+                            {% for t in tiers: %}
+                                <option value="{{t}}">{{t}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td>
+                        <label class="right">Area in sqft</label>
+                        <br><br>
+                        <input class="right" type="text" name="Area" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="left">Number of Bedrooms</label>
+                        <br><br>
+                        <select class="left" name="Bedrooms" required>
+                            <option value="">Select</option>
+                            {% for i in range(0, 8): %}
+                                <option value="{{i}}">{{i}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td>
+                        <label class="right">Number of Bathrooms</label>
+                        <br><br>
+                        <select class="right" name="Bathrooms" required>
+                            <option value="">Select</option>
+                            {% for i in range(0, 8): %}
+                                <option value="{{i}}">{{i}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="left">Latitude</label>
+                        <br><br>
+                        <input class="left" type="text" name="Latitude" required>
+                        <br>
+                    </td>
+                    <td>
+                        <label class="right">Longitude</label>
+                        <br><br>
+                        <input class="right" type="text" name="Longitude" required>
+                        <br>
+                    </td>
+                </tr>
+                <tr>
+                     <td>
+                        <label class="left">Transaction</label>
+                        <br><br>
+                        <select class="left" name="Transaction" required>
+                            <option value="">Select</option>
+                            {% for t in trans: %}
+                                <option value="{{t}}">{{t}}</option>
+                            {% endfor %}
+                        </select>
+                        <br>
+                     </td>
+                    <td>
+                        <label class="right">Furnishing</label>
+                        <br><br>
+                        <select class="right" name="Furnishing" required>
+                            <option value="Select">Select</option>
+                            {% for f in furnish: %}
+                                <option value="{{f}}">{{f}}</option>
+                            {% endfor %}
+                        </select>
+                        <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="left">Status</label>
+                        <br><br>
+                        <select class="left" name="Status" required>
+                            <option value="Select">Select</option>
+                            {% for s in status: %}
+                                <option value="{{s}}">{{s}}</option>
+                            {% endfor %}
+                        </select>
+                        <br>
+                    </td>
+                    <td>
+                        <label class="right">Price per Sqft</label>
+                        <br><br>
+                        <input class="right" type="text" name="Price per sqft" required>
+                        <br>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="container2">
+            <button class="predict" type="submit">Predict Price</button>
+            <button class="price right-button" type="button">{{ price }}</button>
+            <button class="reset" type="reset"><a href="{{ url_for('home_page') }}">Clear</a></button>
+        </div>
+    </form>
+</body>
+</html>
